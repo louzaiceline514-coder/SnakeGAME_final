@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 // Hook de sons générés via Web Audio API (aucun fichier .mp3 requis)
-// - miam : note courte ascendante quand le serpent mange
-// - level_up : arpège 3 notes tous les 5 points
-// - boom : son grave descendant en fin de partie
+// miam : note courte ascendante quand le serpent mange
+// level_up : arpège 3 notes tous les 5 points
+// boom : son grave descendant en fin de partie
 
 function useSoundEffects() {
   const score = useSelector((state) => state.game.score);
@@ -43,7 +43,7 @@ function useSoundEffects() {
       const now = ctx.currentTime;
       playTone(523, "sine", now, 0.08, 0.25, 0.001, ctx);
       playTone(659, "sine", now + 0.05, 0.1, 0.2, 0.001, ctx);
-    } catch (_) {}
+    } catch (_) { }
   };
 
   const playLevelUp = () => {
@@ -54,7 +54,7 @@ function useSoundEffects() {
       notes.forEach((freq, i) => {
         playTone(freq, "sine", now + i * 0.1, 0.12, 0.2, 0.001, ctx);
       });
-    } catch (_) {}
+    } catch (_) { }
   };
 
   const playBoom = () => {
@@ -72,7 +72,7 @@ function useSoundEffects() {
       gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
       osc.start(now);
       osc.stop(now + 0.5);
-    } catch (_) {}
+    } catch (_) { }
   };
 
   // Réagit aux changements de score

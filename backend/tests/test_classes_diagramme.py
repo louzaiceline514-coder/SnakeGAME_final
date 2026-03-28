@@ -14,9 +14,7 @@ from agents.agent_aleatoire import AgentAleatoire
 from game_engine.moteur import MoteurJeu
 
 
-# ---------------------------------------------------------------------------
 # Nourriture
-# ---------------------------------------------------------------------------
 
 class TestNourriture:
     def test_position_initiale_none(self):
@@ -51,9 +49,7 @@ class TestNourriture:
         assert "(2, 3)" in repr(n)
 
 
-# ---------------------------------------------------------------------------
 # Obstacle
-# ---------------------------------------------------------------------------
 
 class TestObstacle:
     def test_statique_par_defaut(self):
@@ -93,9 +89,7 @@ class TestObstacle:
         assert "dynamique" in r
 
 
-# ---------------------------------------------------------------------------
 # CollecteurStatistiques
-# ---------------------------------------------------------------------------
 
 class TestCollecteurStatistiques:
     def test_vide_par_defaut(self):
@@ -152,9 +146,7 @@ class TestCollecteurStatistiques:
             assert key in d
 
 
-# ---------------------------------------------------------------------------
 # ControleurJeu
-# ---------------------------------------------------------------------------
 
 class TestControleurJeu:
     def test_creation_etat_initial(self):
@@ -235,9 +227,7 @@ class TestControleurJeu:
         assert ctrl.collecteur.nb_parties == 3
 
 
-# ---------------------------------------------------------------------------
 # TypeCellule
-# ---------------------------------------------------------------------------
 
 class TestTypeCellule:
     def test_valeurs_entiers(self):
@@ -273,9 +263,7 @@ class TestTypeCellule:
         assert grid[1, 1] == TypeCellule.VIDE
 
 
-# ---------------------------------------------------------------------------
 # EtatJeu
-# ---------------------------------------------------------------------------
 
 class TestEtatJeu:
     def test_valeurs_str(self):
@@ -319,9 +307,7 @@ class TestEtatJeu:
         assert state["etat"] == EtatJeu.EN_COURS
 
 
-# ---------------------------------------------------------------------------
 # AgentAleatoire
-# ---------------------------------------------------------------------------
 
 class TestAgentAleatoire:
     def test_nom_agent(self):

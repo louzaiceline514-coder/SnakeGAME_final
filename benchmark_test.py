@@ -9,10 +9,10 @@ import time
 def run_benchmark():
     base_url = "http://127.0.0.1:8000"
     
-    print("🚀 Lancement des benchmarks...")
+    print(" Lancement des benchmarks...")
     
     # Benchmark A*
-    print("\n🤖 Benchmark A* (50 parties)...")
+    print("\n Benchmark A* (50 parties)...")
     start_time = time.time()
     
     try:
@@ -24,19 +24,19 @@ def run_benchmark():
             duration = time.time() - start_time
             scores = result.get('scores', [])
             
-            print(f"✅ A* terminé en {duration:.2f}s")
+            print(f" A* terminé en {duration:.2f}s")
             print(f"   Episodes: {result.get('episodes')}")
             print(f"   Scores: {scores[:10]}{'...' if len(scores) > 10 else ''}")
             print(f"   Score moyen: {sum(scores)/len(scores):.2f}")
             print(f"   Meilleur score: {max(scores)}")
         else:
-            print(f"❌ Erreur A*: {response.status_code}")
+            print(f" Erreur A*: {response.status_code}")
             
     except Exception as e:
-        print(f"❌ Erreur A*: {e}")
+        print(f" Erreur A*: {e}")
     
     # Benchmark RL
-    print("\n🧠 Benchmark RL (50 parties)...")
+    print("\n Benchmark RL (50 parties)...")
     start_time = time.time()
     
     try:
@@ -48,19 +48,19 @@ def run_benchmark():
             duration = time.time() - start_time
             scores = result.get('scores', [])
             
-            print(f"✅ RL terminé en {duration:.2f}s")
+            print(f" RL terminé en {duration:.2f}s")
             print(f"   Episodes: {result.get('episodes')}")
             print(f"   Scores: {scores[:10]}{'...' if len(scores) > 10 else ''}")
             print(f"   Score moyen: {sum(scores)/len(scores):.2f}")
             print(f"   Meilleur score: {max(scores)}")
         else:
-            print(f"❌ Erreur RL: {response.status_code}")
+            print(f" Erreur RL: {response.status_code}")
             
     except Exception as e:
-        print(f"❌ Erreur RL: {e}")
+        print(f" Erreur RL: {e}")
     
     # Vérification des stats finales
-    print("\n📊 Vérification des stats finales...")
+    print("\n Vérification des stats finales...")
     try:
         response = requests.get(f"{base_url}/api/stats/comparison")
         stats = response.json()
@@ -78,7 +78,7 @@ def run_benchmark():
         print(f"   Taux de survie: {stats['rl']['win_rate']*100:.1f}%")
         
     except Exception as e:
-        print(f"❌ Erreur stats: {e}")
+        print(f" Erreur stats: {e}")
 
 if __name__ == "__main__":
     run_benchmark()

@@ -1,4 +1,4 @@
-"""Agent IA choisissant une direction sûre de manière aléatoire (agent de base F9)."""
+"""Agent IA choisissant une direction sûre de manière aléatoire."""
 
 from __future__ import annotations
 

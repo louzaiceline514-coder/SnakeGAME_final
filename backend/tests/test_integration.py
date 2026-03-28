@@ -18,9 +18,7 @@ from models.game_event import GameEvent
 from models.stats import AgentStats
 
 
-# ---------------------------------------------------------------------------
 # Fixture : base SQLite en mémoire isolée pour chaque test
-# ---------------------------------------------------------------------------
 
 @pytest.fixture()
 def db_session():
@@ -34,9 +32,7 @@ def db_session():
     Base.metadata.drop_all(bind=engine)
 
 
-# ---------------------------------------------------------------------------
 # Helpers
-# ---------------------------------------------------------------------------
 
 def _enregistrer_partie_test(db, engine: MoteurJeu, agent_type: str, agent_name: str,
                                pending_events: list[dict]) -> Game:
@@ -85,9 +81,7 @@ def _enregistrer_partie_test(db, engine: MoteurJeu, agent_type: str, agent_name:
     return game
 
 
-# ---------------------------------------------------------------------------
 # Tests SQLite
-# ---------------------------------------------------------------------------
 
 def test_sqlite_partie_enregistree(db_session):
     """Une partie terminée est bien persistée dans la table games."""
@@ -166,9 +160,7 @@ def test_sqlite_agent_unique_par_type(db_session):
     assert len(agents) == 1
 
 
-# ---------------------------------------------------------------------------
 # Tests flux agent-moteur (sans DB)
-# ---------------------------------------------------------------------------
 
 def test_flux_astar_moteur_100_steps():
     """A* + moteur : 100 pas sans exception, état cohérent à chaque step."""

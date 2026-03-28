@@ -114,7 +114,7 @@ class AgentAStar(Agent):
         corps: List[Coord],
         obstacles: Set[Coord],
     ) -> bool:
-        """Vérifie si la tête peut rejoindre la queue avec le corps simulé."""
+        """vérifie si la tête peut rejoindre la queue avec le corps simulé."""
         if len(corps) <= 1:
             return True
         tete = corps[0]
@@ -128,7 +128,7 @@ class AgentAStar(Agent):
         corps: List[Coord],
         obstacles: Set[Coord],
     ) -> Optional[int]:
-        """Retourne la longueur du chemin vers la queue depuis un état simulé."""
+        """retourne la longueur du chemin vers la queue depuis un état simulé."""
         if len(corps) <= 1:
             return 0
         chemin = self._astar(grille, corps[0], corps[-1], set(corps[1:-1]) | obstacles)

@@ -33,9 +33,7 @@ class ControleurJeu:
         self.nourriture = Nourriture(self._moteur.grille.nourriture)
         self.collecteur = CollecteurStatistiques()
 
-    # ------------------------------------------------------------------ #
-    #  Cycle de vie                                                        #
-    # ------------------------------------------------------------------ #
+    #  Cycle de vie                                                        
 
     def reset(self, mode: Optional[str] = None) -> None:
         """Réinitialise complètement le jeu et synchronise les objets-valeur."""
@@ -63,9 +61,8 @@ class ControleurJeu:
                 cause_mort=self._moteur.cause_mort,
             )
 
-    # ------------------------------------------------------------------ #
-    #  Accesseurs                                                          #
-    # ------------------------------------------------------------------ #
+
+    #  Accesseurs                                                          
 
     def get_obstacles(self) -> List[Obstacle]:
         """Retourne la liste des obstacles actifs (statiques + dynamiques)."""

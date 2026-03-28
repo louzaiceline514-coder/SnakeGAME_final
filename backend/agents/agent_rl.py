@@ -88,7 +88,7 @@ class AgentQL(Agent):
             except Exception:
                 self.q_table = {}
 
-    # ------------------ Encodage d'état ------------------ #
+    # Encodage d'état  #
     def encoder_etat(self, moteur: MoteurJeu) -> StateKey:
         """Encode l'état du jeu en 11 caractéristiques binaires.
 
@@ -162,7 +162,7 @@ class AgentQL(Agent):
             food_right,
         )
 
-    # ------------------ Politique et mise à jour ------------------ #
+    # Politique et mise à jour  #
     def choisir_action(self, state: Dict[str, Any]) -> Direction:
         """Politique epsilon-greedy basée sur la Q-table."""
         moteur: MoteurJeu = state["engine"]
@@ -202,7 +202,7 @@ class AgentQL(Agent):
         self.last_path = self._simulate_greedy_path(moteur, meilleures[0])
         return meilleures[0]
 
-    # ------------------ Simulation chemin greedy (visualisation) ------------------ #
+    # Simulation chemin greedy (visualisation)  
 
     def _greedy_dir_from_pos(
         self,
@@ -306,11 +306,10 @@ class AgentQL(Agent):
         target = reward + self.gamma * max(next_q_vals)
         q_vals[a_idx] = old_q + self.alpha * (target - old_q)
 
-    # ------------------ Boucle d'entraînement ------------------ #
+    # Boucle d'entraînement 
     def entrainer(self, nb_episodes: int, env: MoteurJeu) -> List[float]:
         """Boucle d'entraînement RL sur N épisodes, retourne la liste des scores.
 
-        Récompenses conformes à la spécification :
         +10 manger, -10 mourir, +1 se rapprocher de la nourriture, -1 s'en éloigner.
         """
         scores: List[float] = []

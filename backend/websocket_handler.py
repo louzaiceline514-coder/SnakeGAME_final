@@ -47,9 +47,7 @@ class GameWebSocketManager:
         self._static_sent: bool = False
         self._tick_count: int = 0
 
-    # ------------------------------------------------------------------
     # Sérialisation / delta
-    # ------------------------------------------------------------------
 
     def _build_full_payload(self, state_dict: Dict[str, Any]) -> bytes:
         """Construit le message complet JSON (premier frame ou après reset)."""
@@ -67,9 +65,7 @@ class GameWebSocketManager:
         if self._tick_count % _MSG_SIZE_LOG_INTERVAL == 0:
             print(f"[WS] tick={self._tick_count} msg_size={len(payload)} octets")
 
-    # ------------------------------------------------------------------
     # Boucle principale
-    # ------------------------------------------------------------------
 
     async def handle(self, websocket: WebSocket) -> None:
         """Boucle principale de gestion du WebSocket."""

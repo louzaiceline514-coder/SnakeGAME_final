@@ -35,9 +35,7 @@ def _run_session(agent, mode: str) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
 # A* : session complète
-# ---------------------------------------------------------------------------
 
 def test_astar_session_complete_sans_crash():
     """Une session A* complète (jusqu'au game_over ou 500 steps) ne lève pas d'exception."""
@@ -80,9 +78,7 @@ def test_astar_plusieurs_sessions_independantes():
     assert r2["step_count"] > 0
 
 
-# ---------------------------------------------------------------------------
 # Q-Learning : session complète
-# ---------------------------------------------------------------------------
 
 def test_rl_session_complete_sans_crash():
     """Une session QL complète ne lève pas d'exception."""
@@ -122,9 +118,7 @@ def test_rl_plusieurs_sessions_independantes():
     assert r2["step_count"] > 0
 
 
-# ---------------------------------------------------------------------------
 # JoueurHumain : session simulée
-# ---------------------------------------------------------------------------
 
 def test_humain_session_directions_successives():
     """JoueurHumain : enchaînement de directions sans crash."""
@@ -166,9 +160,7 @@ def test_humain_fallback_sans_direction():
     assert direction == direction_courante
 
 
-# ---------------------------------------------------------------------------
 # Tests de robustesse moteur (E2E sans agent)
-# ---------------------------------------------------------------------------
 
 def test_moteur_reset_multiple():
     """Plusieurs reset successifs ne corrompent pas l'état."""

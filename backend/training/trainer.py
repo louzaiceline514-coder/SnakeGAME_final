@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Callable, List, Optional
 
 try:
-    import pandas as pd  # optionnel : génération du résumé statistique avancé
+    import pandas as pd  #  génération du résumé statistique avancé
     _HAS_PANDAS = True
 except ImportError:
     _HAS_PANDAS = False

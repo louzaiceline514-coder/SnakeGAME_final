@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// Tableau de bord temps réel pour la partie en cours.
+// tableau de bord temps réel pour la partie en cours.
 
-// Charte : couleur du mode selon l'agent
+// charte : couleur du mode selon l'agent
 const modeLabel = { manual: "Manuel", astar: "A*", rl: "Q-Learning", random: "Aléatoire" };
-const modeColor  = { manual: "text-emerald-400", astar: "text-blue-400", rl: "text-violet-400", random: "text-amber-400" };
+const modeColor = { manual: "text-emerald-400", astar: "text-blue-400", rl: "text-violet-400", random: "text-amber-400" };
 
 function Dashboard() {
   const { score, stepCount, mode, gameOver } = useSelector((state) => state.game);
