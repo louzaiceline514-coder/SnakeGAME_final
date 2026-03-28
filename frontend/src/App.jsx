@@ -23,11 +23,11 @@ function App() {
         <div className="w-full max-w-4xl rounded-[2rem] border border-blue-500/15 bg-slate-900/80 p-8 md:p-12 text-center space-y-6 shadow-[0_24px_80px_rgba(15,23,42,0.55)]">
           <div className="space-y-3">
             {/* Charte : Poppins pour les titres */}
-            <p className="text-sm uppercase tracking-[0.4em] text-blue-400 font-title">Snake AI SAE4</p>
+            <p className="text-sm uppercase tracking-[0.4em] text-blue-400 font-title">SnakeGame</p>
             <h1 className="text-4xl md:text-6xl font-bold font-title">Jeu, duel IA et statistiques réelles</h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Une expérience web moderne pour comparer le mode manuel, A* et Q-Learning avec des
-              parties réellement enregistrées, des graphiques vivants et une ambiance plus arcade.
+              Comparer le mode manuel, A* et Q-Learning avec des
+              parties enregistrées.
             </p>
           </div>
 
@@ -66,48 +66,44 @@ function App() {
         <div>
           {/* Charte : Poppins pour le titre principal */}
           <h1 className="text-xl font-bold font-title text-slate-50">Snake AI Dashboard</h1>
-          <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500 font-mono">SAE4 • UPJV</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500 font-mono">SnakeGame</p>
         </div>
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
           <nav className="space-x-2">
             {/* Charte : Emerald=Joueur, Blue=A*, Violet=RL, Amber=Obstacles/Warning */}
             <button
               onClick={() => setView("game")}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                view === "game"
-                  ? "bg-emerald-500 text-white"
-                  : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
-              }`}
+              className={`px-3 py-1 rounded text-sm font-medium ${view === "game"
+                ? "bg-emerald-500 text-white"
+                : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
+                }`}
             >
               Jeu
             </button>
             <button
               onClick={() => setView("battle")}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                view === "battle"
-                  ? "bg-blue-500 text-white"
-                  : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
-              }`}
+              className={`px-3 py-1 rounded text-sm font-medium ${view === "battle"
+                ? "bg-blue-500 text-white"
+                : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
+                }`}
             >
               A* vs Q-Learning
             </button>
             <button
               onClick={() => setView("stats")}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                view === "stats"
-                  ? "bg-violet-500 text-white"
-                  : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
-              }`}
+              className={`px-3 py-1 rounded text-sm font-medium ${view === "stats"
+                ? "bg-violet-500 text-white"
+                : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
+                }`}
             >
               Analyse
             </button>
             <button
               onClick={() => setView("training")}
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                view === "training"
-                  ? "bg-amber-500 text-white"
-                  : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
-              }`}
+              className={`px-3 py-1 rounded text-sm font-medium ${view === "training"
+                ? "bg-amber-500 text-white"
+                : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
+                }`}
             >
               Entraînement
             </button>

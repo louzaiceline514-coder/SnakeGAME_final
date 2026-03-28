@@ -126,7 +126,7 @@ function TrainingPanel() {
           <div>
             <p className="text-sm font-medium text-slate-100">Mode performance (sans obstacles)</p>
             <p className="text-xs text-slate-400">
-              Désactive tous les obstacles pour atteindre A*&gt;200 / RL&gt;150 — objectifs du CDC.
+              Désactive tous les obstacles pour mesurer les performances maximales.
             </p>
           </div>
           <button
@@ -140,7 +140,7 @@ function TrainingPanel() {
         </div>
         {!withObstacles && (
           <p className="text-xs text-amber-300 bg-amber-500/10 rounded-lg px-3 py-2 border border-amber-500/20">
-            Mode performance actif — grille sans obstacles, scores élevés attendus (A*&gt;200, RL&gt;50).
+            Mode performance actif grille sans obstacles.
           </p>
         )}
       </div>
