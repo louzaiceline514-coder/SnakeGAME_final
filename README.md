@@ -23,7 +23,8 @@ Le mode Manuel permet de jouer soi-même au clavier.
 7. [Description des algorithmes](#description-des-algorithmes)
 8. [Structure du projet](#structure-du-projet)
 9. [Base de données](#base-de-données)
-10. [Dépannage](#dépannage)
+10. [Documentation](#documentation)
+11. [Dépannage](#dépannage)
 
 ---
 
@@ -218,25 +219,23 @@ Affiche la comparaison des performances entre A* et Q-Learning basée sur les pa
 Depuis la **racine du projet** :
 
 ```bash
-python -m pytest tests/ -v
+python -m pytest tests/ backend/tests/ -v
 ```
 
-Couverture (107 tests) :
+Couverture :
 
 | Fichier | Tests |
 |---|---|
-| `test_serpent.py` | Déplacement, croissance, collisions, demi-tour |
-| `test_grille.py` | Génération nourriture/obstacles, voisins, NumPy grid |
-| `test_moteur.py` | Cycle de jeu, step, reset, cause_mort |
-| `test_astar.py` | Chemin simple, heuristique Manhattan, obstacles, fallback survie |
-| `test_rl.py` | Encodage état (11 features), mise à jour Q-table, équation de Bellman, décroissance epsilon |
-| `test_classes_diagramme.py` | Nourriture, Obstacle, CollecteurStatistiques, ControleurJeu, TypeCellule, EtatJeu, AgentAleatoire (39 tests) |
-| `test_functional.py` | Sessions complètes A*, RL et humain (E2E sans DB) |
-| `test_integration.py` | Persistance SQLite, flux agent-moteur, latences A* et RL |
-| `test_api.py` | Routes REST /api/health, /api/game, /api/stats, /api/agents |
-| `test_websocket.py` | Connexion WebSocket, messages binaires orjson, deltas game_delta |
-
-**Total : 107 tests pytest (tous verts)**
+| `tests/test_serpent.py` | Déplacement, croissance, collisions, demi-tour |
+| `tests/test_grille.py` | Génération nourriture/obstacles, voisins, NumPy grid |
+| `tests/test_moteur.py` | Cycle de jeu, step, reset, cause_mort |
+| `tests/test_astar.py` | Chemin simple, heuristique Manhattan, obstacles, fallback survie |
+| `tests/test_rl.py` | Encodage état (11 features), mise à jour Q-table, équation de Bellman, décroissance epsilon |
+| `tests/test_api.py` | Routes REST /api/health, /api/game, /api/stats, /api/agents |
+| `backend/tests/test_classes_diagramme.py` | Nourriture, Obstacle, CollecteurStatistiques, ControleurJeu, TypeCellule, EtatJeu, AgentAleatoire (39 tests) |
+| `backend/tests/test_functional.py` | Sessions complètes A*, RL et humain (E2E sans DB) |
+| `backend/tests/test_integration.py` | Persistance SQLite, flux agent-moteur, latences A* et RL |
+| `backend/tests/test_websocket.py` | Connexion WebSocket, messages binaires orjson, deltas game_delta |
 
 ### Tests frontend (Vitest)
 
@@ -313,6 +312,11 @@ SnakeGAME_final/
 │   │   ├── agents_routes.py        # /api/agent (init, step, save)
 │   │   ├── stats_routes.py         # /api/stats (comparison, history, replay)
 │   │   └── training_routes.py      # /api/training (run, results)
+│   ├── tests/
+│   │   ├── test_classes_diagramme.py  # 39 tests diagramme de classes
+│   │   ├── test_functional.py      # E2E sessions complètes
+│   │   ├── test_integration.py     # SQLite + latences
+│   │   └── test_websocket.py       # Tests WebSocket
 │   ├── training/
 │   │   └── trainer.py              # Boucle entraînement RL + sauvegarde BDD
 │   ├── config.py                   # Paramètres globaux (GRID_SIZE=25, RL params, CORS)
@@ -348,33 +352,21 @@ SnakeGAME_final/
 │           ├── Dashboard.test.jsx
 │           ├── BattleArena.test.jsx
 │           └── TrainingPanel.test.jsx
-├── tests/                          # Tests backend pytest
+├── tests/                          # Tests backend pytest (racine)
 │   ├── test_serpent.py
 │   ├── test_grille.py
 │   ├── test_moteur.py
 │   ├── test_astar.py
 │   ├── test_rl.py
 │   └── test_api.py
-├── backend/
-│   └── tests/
-│       ├── test_functional.py      # E2E sessions complètes
-│       ├── test_integration.py     # SQLite + latences
-│       ├── test_classes_diagramme.py  # 39 tests diagramme de classes
-│       └── test_websocket.py       # Tests WebSocket
 ├── docs/
-│   ├── rapport_conception_detaillee_final.md  # Conception détaillée + Mermaid
-│   ├── rapport_final_complet.md               # Rapport final + analyse écarts
-│   ├── MANUEL_INSTALLATION.md                 # → voir MANUEL_INSTALLATION.md (racine)
-│   ├── manuel_utilisation.md                  # Manuel utilisateur complet
-│   ├── schema_base_de_donnees.md              # Schéma BDD + requêtes types
-│   ├── diagramme_classes.md                   # Diagramme de classes ASCII
-│   └── diagramme_paquetages.md                # Diagramme de paquetages
+│   ├── Manuel d'utilisation.pdf    # Manuel utilisateur complet
+│   ├── manuel_installation.pdf     # Guide d'installation Windows/Linux/macOS
+│   └── schema_base_de_donnees.pdf  # Schéma BDD + requêtes types
 ├── start.bat                       # Lancement automatique Windows
 ├── start.sh                        # Lancement automatique Linux
 ├── start.command                   # Lancement automatique macOS
-├── MANUEL_INSTALLATION.md          # Manuel d'installation Windows/Linux/macOS
-├── qtable.json                     # Q-table (générée après entraînement RL)
-├── training_results.csv            # Scores par épisode (générés à l'entraînement)
+├── qtable.json                     # Q-table entraînée (rechargée au démarrage)
 └── snake.db                        # Base SQLite (générée au premier lancement)
 ```
 
@@ -392,9 +384,19 @@ La base SQLite (`snake.db`) est créée automatiquement au démarrage du backend
 | `agent_stats` | Statistiques agrégées par agent (score moyen, meilleur score, taux de survie) |
 | `rl_training` | Historique des épisodes d'entraînement RL (score, epsilon, alpha…) |
 
-Voir [docs/schema_base_de_donnees.md](docs/schema_base_de_donnees.md) pour le schéma complet.
-
 > Si vous avez une base existante sans les nouvelles tables, supprimez `snake.db` et relancez le backend.
+
+---
+
+## Documentation
+
+Les documents sont disponibles dans le dossier `docs/` :
+
+| Fichier | Description |
+|---|---|
+| `docs/Manuel d'utilisation.pdf` | Manuel utilisateur complet (modes, contrôles, interface) |
+| `docs/manuel_installation.pdf` | Guide d'installation détaillé Windows / Linux / macOS |
+| `docs/schema_base_de_donnees.pdf` | Schéma de la base de données SQLite et requêtes types |
 
 ---
 
@@ -408,6 +410,6 @@ Voir [docs/schema_base_de_donnees.md](docs/schema_base_de_donnees.md) pour le sc
 | Q-table vide / mauvaises performances RL | Lancer un entraînement depuis le panneau Entraînement (au moins 50 épisodes) |
 | `snake.db` avec tables manquantes | Supprimer `snake.db`, relancer `uvicorn main:app --reload --port 8000` |
 | Tests frontend échouent | Lancer `npm install` dans `frontend/` puis `npm test` |
-| Tests backend échouent | Lancer depuis la racine avec `python -m pytest tests/ -v` |
+| Tests backend échouent | Lancer depuis la racine avec `python -m pytest tests/ backend/tests/ -v` |
 | macOS : `start.command` bloqué | Clic droit → Ouvrir → Ouvrir quand même |
 | Python introuvable sur Linux/macOS | Utiliser `python3` et `pip3` à la place de `python` et `pip` |
